@@ -8,14 +8,6 @@ def read_image(path):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     return img
 
-
-def resize(img, w, h):
-    return cv2.resize(img, (w, h))
-# step 1:
-# SIFT:
-#       1.1 grayScale
-#       1.2 same height resize
-#       1.3 keypoints and descriptors
 def same_height(img1, img2):
     dim1 = img1.shape[:2]
     dim2 = img2.shape[:2]
@@ -77,9 +69,6 @@ height_panorama = left_img.shape[0]
 # fill the first part of the panorama image with the right image, and the left part with left_image
 res = cv2.warpPerspective(image_right, H, (width_panorama, height_panorama))
 res[0:image_left.shape[0], 0:image_left.shape[1]] = image_left
-
-plt.imshow(res)
-plt.show()
 # get rid of the black threshold with contours
 grayColorImage = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
 _, thresh = cv2.threshold(grayColorImage, 1, 255, cv2.THRESH_BINARY)
